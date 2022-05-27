@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insolvency.CommonServices.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insolvency.CommonServices.WorldpayProxy.Tests", "Insolvency.CommonServices.WorldpayProxy.Tests\Insolvency.CommonServices.WorldpayProxy.Tests.csproj", "{56CAF644-418D-4504-8D47-0B35474E22A8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{762DC0DF-59B1-4A6F-8959-0C3F65385FED}"
+	ProjectSection(SolutionItems) = preProject
+		INSS - Worldpay.postman_collection.json = INSS - Worldpay.postman_collection.json
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
