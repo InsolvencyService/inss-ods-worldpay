@@ -90,32 +90,60 @@ stages:
 - stage: DeployDev
   displayName: 'Deploy to Dev'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  variables:
+    - group: Worldpay-Dev
   jobs:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'Dev'
+        merchantCode: $(MerchantCode)
+        paymentReceiptServiceUrl: $(PaymentReceiptServiceUrl)
+        worldpayPassword: $(WorldpayPassword)
+        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        worldpayUsername: $(WorldpayUsername)
         
 # - stage: DeploySIT
 #   displayName: 'Deploy to SIT'
 #   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+#   variables:
+#     - group: Worldpay-SIT
 #   jobs:
 #     - template: deploy-jobs-template.yml
 #       parameters:
 #         environment: 'SIT'
+#         merchantCode: $(MerchantCode)
+#         paymentReceiptServiceUrl: $(PaymentReceiptServiceUrl)
+#         worldpayPassword: $(WorldpayPassword)
+#         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+#         worldpayUsername: $(WorldpayUsername)
 
 # - stage: DeployPreProd
 #   displayName: 'Deploy to PreProd'
 #   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+#   variables:
+#     - group: Worldpay-PreProd
 #   jobs:
 #     - template: deploy-jobs-template.yml
 #       parameters:
 #         environment: 'PreProd'
+#         merchantCode: $(MerchantCode)
+#         paymentReceiptServiceUrl: $(PaymentReceiptServiceUrl)
+#         worldpayPassword: $(WorldpayPassword)
+#         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+#         worldpayUsername: $(WorldpayUsername)
 
 # - stage: DeployProd
 #   displayName: 'Deploy to Prod'
 #   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+#   variables:
+#     - group: Worldpay-Prod
 #   jobs:
 #     - template: deploy-jobs-template.yml
 #       parameters:
 #         environment: 'Prod'
 #         azureSubscription: 'App Services DevOps Prod'
+#         merchantCode: $(MerchantCode)
+#         paymentReceiptServiceUrl: $(PaymentReceiptServiceUrl)
+#         worldpayPassword: $(WorldpayPassword)
+#         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+#         worldpayUsername: $(WorldpayUsername)

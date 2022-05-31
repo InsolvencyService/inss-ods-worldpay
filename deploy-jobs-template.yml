@@ -20,6 +20,16 @@ parameters:
   - name: timeoutSec
     type: number
     default: 120
+  - name: merchantCode
+    type: string
+  - name: paymentReceiptServiceUrl
+    type: string
+  - name: worldpayPassword
+    type: string
+  - name: worldpayPaymentServiceUrl
+    type: string
+  - name: worldpayUsername
+    type: string
 
 jobs:
   - deployment:
@@ -53,6 +63,31 @@ jobs:
                     {
                       "name": "Environ",
                       "value": "${{ lower(parameters.environment) }}",
+                      "slotSetting": false
+                    },
+                    {
+                      "name": "MerchantCode",
+                      "value": "${{ parameters.merchantCode }}",
+                      "slotSetting": false
+                    },
+                    {
+                      "name": "PaymentReceiptServiceUrl",
+                      "value": "${{ parameters.paymentReceiptServiceUrl }}",
+                      "slotSetting": false
+                    },
+                    {
+                      "name": "WorldpayPassword",
+                      "value": "${{ parameters.worldpayPassword }}",
+                      "slotSetting": false
+                    },
+                    {
+                      "name": "WorldpayPaymentServiceUrl",
+                      "value": "${{ parameters.worldpayPaymentServiceUrl }}",
+                      "slotSetting": false
+                    },
+                    {
+                      "name": "WorldpayUsername",
+                      "value": "${{ parameters.worldpayUsername }}",
                       "slotSetting": false
                     }
                   ]
