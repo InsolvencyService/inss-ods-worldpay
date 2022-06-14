@@ -97,7 +97,6 @@ stages:
       parameters:
         environment: 'Dev'
         merchantCode: $(MerchantCode)
-        paymentReceiptServiceUrl: $(PaymentReceiptServiceUrl)
         worldpayPassword: $(WorldpayPassword)
         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
         worldpayUsername: $(WorldpayUsername)
@@ -112,7 +111,6 @@ stages:
       parameters:
         environment: 'SIT'
         merchantCode: $(MerchantCode)
-        paymentReceiptServiceUrl: $(PaymentReceiptServiceUrl)
         worldpayPassword: $(WorldpayPassword)
         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
         worldpayUsername: $(WorldpayUsername)
@@ -127,7 +125,6 @@ stages:
       parameters:
         environment: 'PreProd'
         merchantCode: $(MerchantCode)
-        paymentReceiptServiceUrl: $(PaymentReceiptServiceUrl)
         worldpayPassword: $(WorldpayPassword)
         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
         worldpayUsername: $(WorldpayUsername)
@@ -143,7 +140,6 @@ stages:
 #         environment: 'Prod'
 #         azureSubscription: 'App Services DevOps Prod'
 #         merchantCode: $(MerchantCode)
-#         paymentReceiptServiceUrl: $(PaymentReceiptServiceUrl)
 #         worldpayPassword: $(WorldpayPassword)
 #         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
 #         worldpayUsername: $(WorldpayUsername)
