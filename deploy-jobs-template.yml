@@ -22,11 +22,7 @@ parameters:
     default: 120
   - name: merchantCode
     type: string
-  - name: worldpayPassword
-    type: string
   - name: worldpayPaymentServiceUrl
-    type: string
-  - name: worldpayUsername
     type: string
   - name: appInsightsConnectionString
     type: string
@@ -77,7 +73,7 @@ jobs:
                     },
                     {
                       "name": "WorldpayPassword",
-                      "value": "${{ parameters.worldpayPassword }}",
+                      "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=worldpay-password)",
                       "slotSetting": false
                     },
                     {
@@ -87,7 +83,7 @@ jobs:
                     },
                     {
                       "name": "WorldpayUsername",
-                      "value": "${{ parameters.worldpayUsername }}",
+                      "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=worldpay-username)",
                       "slotSetting": false
                     },
                     {

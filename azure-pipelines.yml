@@ -97,9 +97,7 @@ stages:
       parameters:
         environment: 'Dev'
         merchantCode: $(MerchantCode)
-        worldpayPassword: $(WorldpayPassword)
         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        worldpayUsername: $(WorldpayUsername)
         appInsightsConnectionString: $(AppInsightsConnectionString)
         
 - stage: DeploySIT
@@ -112,9 +110,7 @@ stages:
       parameters:
         environment: 'SIT'
         merchantCode: $(MerchantCode)
-        worldpayPassword: $(WorldpayPassword)
         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        worldpayUsername: $(WorldpayUsername)
         appInsightsConnectionString: $(AppInsightsConnectionString)
 
 - stage: DeployPreProd
@@ -127,23 +123,19 @@ stages:
       parameters:
         environment: 'PreProd'
         merchantCode: $(MerchantCode)
-        worldpayPassword: $(WorldpayPassword)
         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        worldpayUsername: $(WorldpayUsername)
         appInsightsConnectionString: $(AppInsightsConnectionString)
 
-# - stage: DeployProd
-#   displayName: 'Deploy to Prod'
-#   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
-#   variables:
-#     - group: Worldpay-Prod
-#   jobs:
-#     - template: deploy-jobs-template.yml
-#       parameters:
-#         environment: 'Prod'
-#         azureSubscription: 'App Services DevOps Prod'
-#         merchantCode: $(MerchantCode)
-#         worldpayPassword: $(WorldpayPassword)
-#         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-#         worldpayUsername: $(WorldpayUsername)
-#         appInsightsConnectionString: $(AppInsightsConnectionString)
+- stage: DeployProd
+  displayName: 'Deploy to Prod'
+  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  variables:
+    - group: Worldpay-Prod
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'Prod'
+        azureSubscription: 'AppServicesDevOps-Prod'
+        merchantCode: $(MerchantCode)
+        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        appInsightsConnectionString: $(AppInsightsConnectionString)
