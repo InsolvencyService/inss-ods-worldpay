@@ -33,10 +33,9 @@ namespace INSS.ODS.WorldPay.Services
                     writer.Formatting = Formatting.Indented;
 
                     //document start and doc type declaration
-                    var dtdPath = $"{_settings.WorldPayWebAppBaseUrl}/content/paymentService_v1.dtd";
 
                     writer.WriteStartDocument();
-                    writer.WriteDocType("paymentService", " -//WorldPay//DTD WorldPay PaymentService v1//EN", dtdPath,
+                    writer.WriteDocType("paymentService", " -//WorldPay//DTD WorldPay PaymentService v1//EN", _settings.WorldPayDtdUrl,
                         null);
 
                     //payment service element
@@ -87,9 +86,8 @@ namespace INSS.ODS.WorldPay.Services
                     writer.Formatting = Formatting.Indented;
 
                     //document start and doc type declaration
-                    var dtdPath = $"{_settings.WorldPayWebAppBaseUrl}/content/paymentService_v1.dtd";
                     writer.WriteStartDocument();
-                    writer.WriteDocType("paymentService", " -//WorldPay//DTD WorldPay PaymentService v1//EN", dtdPath,
+                    writer.WriteDocType("paymentService", " -//WorldPay//DTD WorldPay PaymentService v1//EN", _settings.WorldPayDtdUrl,
                         null);
 
                     //payment service element
@@ -136,10 +134,9 @@ namespace INSS.ODS.WorldPay.Services
                     writer.Formatting = Formatting.Indented;
 
                     //document start and doc type declaration
-                    var dtdPath = $"{_settings.WorldPayWebAppBaseUrl}/content/paymentService_v1.dtd";
 
                     writer.WriteStartDocument();
-                    writer.WriteDocType("paymentService", " -//WorldPay//DTD WorldPay PaymentService v1//EN", dtdPath,
+                    writer.WriteDocType("paymentService", " -//WorldPay//DTD WorldPay PaymentService v1//EN", _settings.WorldPayDtdUrl,
                         null);
 
                     //payment service element

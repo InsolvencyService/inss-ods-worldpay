@@ -14,12 +14,22 @@ namespace INSS.ODS.WorldPay
         {
             builder.Services.AddSingleton<IOrderService, OrderService>();
             builder.Services.AddSingleton<IPaymentXmlParserService, PaymentXmlParserService>();
+            builder.Services.AddSingleton<IPaymentReceiptService, PaymentReceiptService>();
+            builder.Services.AddSingleton<IPaymentService, WorldpayPaymentService>();
 
             builder.Services.AddOptions<ExternalAppSettings>()
                 .Configure<IConfiguration>((settings, config) =>
                 {
                     config.GetSection("ExternalAppSettings").Bind(settings);
                 });
+
+            builder.Services.AddOptions<SiteSitting>()
+                .Configure<IConfiguration>((settings, config) =>
+                {
+                    config.GetSection("SiteSitting").Bind(settings);
+                });
+
+            builder.Services.AddHealthChecks();
         }
 
         public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
