@@ -1,3 +1,4 @@
+global using INSS.ODS.WorldPay.Contants;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.Azure.WebJobs;

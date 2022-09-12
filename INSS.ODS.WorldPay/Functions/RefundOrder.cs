@@ -1,4 +1,3 @@
-using INSS.ODS.WorldPay.Contants;
 using INSS.ODS.WorldPay.Helpers;
 using INSS.ODS.WorldPay.Models;
 using INSS.ODS.WorldPay.Services;
@@ -11,11 +10,11 @@ namespace INSS.ODS.WorldPay.Functions
 {
     public class RefundOrder
     {
-        private readonly ILogger<CreateOrder> _logger;
+        private readonly ILogger<RefundOrder> _logger;
         private readonly IPaymentService _paymentService;
         private readonly SiteSitting _settings;
 
-        public RefundOrder(ILogger<CreateOrder> log, IPaymentService paymentService, IOptions<SiteSitting> options)
+        public RefundOrder(ILogger<RefundOrder> log, IPaymentService paymentService, IOptions<SiteSitting> options)
         {
             _logger = log;
             _paymentService = paymentService;

@@ -1,4 +1,3 @@
-using INSS.ODS.WorldPay.Contants;
 using INSS.ODS.WorldPay.Helpers;
 using INSS.ODS.WorldPay.Models;
 using INSS.ODS.WorldPay.Services;
@@ -10,11 +9,11 @@ namespace INSS.ODS.WorldPay.Functions
 {
     public class CancelOrder
     {
-        private readonly ILogger<CreateOrder> _logger;
+        private readonly ILogger<CancelOrder> _logger;
         private readonly IPaymentService _paymentService;
         private readonly SiteSitting _settings;
 
-        public CancelOrder(ILogger<CreateOrder> log, IPaymentService paymentService, IOptions<SiteSitting> options)
+        public CancelOrder(ILogger<CancelOrder> log, IPaymentService paymentService, IOptions<SiteSitting> options)
         {
             _logger = log;
             _paymentService = paymentService;
