@@ -1,0 +1,354 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "WorldPay OpenApi Specification",
+    "description": "This is the OpenAPI Document for WorldPay API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:7106/api"
+    }
+  ],
+  "paths": {
+    "/worldpay/{installationId}/cancel/{orderCode}": {
+      "post": {
+        "tags": [
+          "WorldPay",
+          "CancelOrder"
+        ],
+        "summary": "Cancel Order",
+        "operationId": "Run",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/worldpayResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/worldpay/{installationId}": {
+      "post": {
+        "tags": [
+          "WorldPay",
+          "CreateUpdate"
+        ],
+        "summary": "Create Order",
+        "operationId": "Run",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/worldpayResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/PaymentService": {
+      "post": {
+        "tags": [
+          "Payment",
+          "WorldPay"
+        ],
+        "summary": "Make Payment",
+        "operationId": "Run",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/xml; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/proxy": {
+      "post": {
+        "tags": [
+          "Order",
+          "Proxy",
+          "WorldPay"
+        ],
+        "summary": "Order Proxy",
+        "operationId": "Run",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/xml; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/worldpay/{installationId}/refund": {
+      "post": {
+        "tags": [
+          "WorldPay",
+          "RefundOrder"
+        ],
+        "summary": "Refund Order",
+        "operationId": "Run",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/worldpayResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/orderupdate": {
+      "post": {
+        "tags": [
+          "WorldPay",
+          "OrderUpdate"
+        ],
+        "summary": "Update Order",
+        "operationId": "Run",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/health/ping": {
+      "get": {
+        "tags": [
+          "WorldPay",
+          "HealthCheck"
+        ],
+        "summary": "Get service health status",
+        "description": "Get service health status",
+        "operationId": "Run",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/okResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "HealthCheck",
+          "WorldPay"
+        ],
+        "summary": "Get service and dependencies health status",
+        "description": "Get service and dependencies health status",
+        "operationId": "Run",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/healthCheckResultReady"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/healthCheckResultReady"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Not Available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/healthCheckResultReady"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "healthCheckEntry": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "duration": {
+            "$ref": "#/components/schemas/timeSpan"
+          },
+          "description": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "healthCheckResultReady": {
+        "type": "object",
+        "properties": {
+          "serviceName": {
+            "type": "string"
+          },
+          "serviceStatus": {
+            "type": "string"
+          },
+          "duration": {
+            "$ref": "#/components/schemas/timeSpan"
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/healthCheckEntry"
+            }
+          }
+        }
+      },
+      "okResult": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "timeSpan": {
+        "type": "object",
+        "properties": {
+          "ticks": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "days": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hours": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "milliseconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "seconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalDays": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalHours": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalMilliseconds": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalMinutes": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalSeconds": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "worldpayResponse": {
+        "type": "object",
+        "properties": {
+          "orderCode": {
+            "type": "string"
+          },
+          "redirectUrl": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

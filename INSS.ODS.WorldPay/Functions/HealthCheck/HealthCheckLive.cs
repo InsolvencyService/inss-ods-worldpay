@@ -1,5 +1,3 @@
-using INSS.ODS.WorldPay.Contants;
-
 namespace INSS.ODS.WorldPay.Functions.HealthCheck;
 
 public class HealthCheckLive

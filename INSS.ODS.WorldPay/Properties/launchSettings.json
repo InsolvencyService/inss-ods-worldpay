@@ -2,7 +2,7 @@
   "profiles": {
     "INSS.ODS.WorldPay": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7011",
+      "commandLineArgs": "--port 7106",
       "launchBrowser": false
     }
   }
