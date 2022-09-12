@@ -41,7 +41,7 @@ namespace INSS.ODS.WorldPay.Functions
 
             try
             {
-                var xml = Xml.CreateOrderXml(installationId, worldPayOrder, _settings.MerchantCode);
+                var xml = Xml.CreateOrderXml(installationId, worldPayOrder, _settings.MerchantCode, DateTime.Now);
 
                 var response = _paymentService.PostOrder(xml);
 

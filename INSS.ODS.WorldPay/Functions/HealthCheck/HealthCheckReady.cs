@@ -1,7 +1,7 @@
 using INSS.ODS.WorldPay.Contants;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace INSS.ODS.WorldPay.Functions;
+namespace INSS.ODS.WorldPay.Functions.HealthCheck;
 
 public class HealthCheckReady
 {

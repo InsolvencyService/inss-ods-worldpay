@@ -13,8 +13,9 @@ namespace INSS.ODS.WorldPay.Helpers
         /// <param name="installationId">The id of the Worldpay Installation</param>
         /// <param name="order">A Worldpay Order instance, populated with data</param>
         /// <param name="merchantCode">Merchant Code</param>
+        /// <param name="currentDateTime">Current DateTime</param>
         /// <returns>Worldpay-format Order Xml</returns>
-        public static string CreateOrderXml(string installationId, WorldpayOrder order, string merchantCode)
+        public static string CreateOrderXml(string installationId, WorldpayOrder order, string merchantCode, DateTime currentDateTime)
         {
             var settings = new XmlWriterSettings
             {
@@ -109,12 +110,12 @@ namespace INSS.ODS.WorldPay.Helpers
                     writer.WriteAttributeString("authenticationMethod", "localAccount");
                     writer.WriteStartElement("authenticationTimestamp");
                     writer.WriteStartElement("date");
-                    writer.WriteAttributeString("year", DateTime.Now.Year.ToString());
-                    writer.WriteAttributeString("month", DateTime.Now.Month.ToString());
-                    writer.WriteAttributeString("dayOfMonth", DateTime.Now.Day.ToString());
-                    writer.WriteAttributeString("hour", DateTime.Now.Hour.ToString());
-                    writer.WriteAttributeString("minute", DateTime.Now.Minute.ToString());
-                    writer.WriteAttributeString("second", DateTime.Now.Second.ToString());
+                    writer.WriteAttributeString("year", currentDateTime.Year.ToString());
+                    writer.WriteAttributeString("month", currentDateTime.Month.ToString());
+                    writer.WriteAttributeString("dayOfMonth", currentDateTime.Day.ToString());
+                    writer.WriteAttributeString("hour", currentDateTime.Hour.ToString());
+                    writer.WriteAttributeString("minute", currentDateTime.Minute.ToString());
+                    writer.WriteAttributeString("second", currentDateTime.Second.ToString());
                     writer.WriteEndElement();
                     writer.WriteEndElement(); //end authenticationTimestamp
                     writer.WriteEndElement(); //end authenticationRiskData
