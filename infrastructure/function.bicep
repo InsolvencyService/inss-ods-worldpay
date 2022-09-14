@@ -63,6 +63,14 @@ resource functionApp 'Microsoft.Web/sites@2018-11-01' = {
           name: 'FUNCTIONS_WORKER_RUNTIME'
           value: functionWorkerRuntime
         }
+        {
+          name: 'CredentialsSettings__WorldpayUsername'
+          value: '[TO_BE_POPULATED_BY_PIPELINE]'
+        }
+        {
+          name: 'CredentialsSettings__WorldpayPassword'
+          value: '[TO_BE_POPULATED_BY_PIPELINE]'
+        }
       ]
     }
   }

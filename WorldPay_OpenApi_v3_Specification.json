@@ -1,8 +1,12 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "WorldPay OpenApi Specification",
-    "description": "This is the OpenAPI Document for WorldPay API",
+    "title": "WorldPay API",
+    "description": "WorldPay API",
+    "license": {
+      "name": "Insolvency Service",
+      "url": "https://www.gov.uk/government/organisations/insolvency-service"
+    },
     "version": "1.0.0"
   },
   "servers": [
