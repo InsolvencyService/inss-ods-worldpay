@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "258beff4-388d-4432-b661-58fc44e99eba",
 		"name": "WorldPay API",
-		"description": "This is the OpenAPI Document on Azure Functions",
+		"description": "WorldPay API endpoints specification",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

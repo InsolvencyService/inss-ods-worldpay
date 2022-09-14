@@ -29,6 +29,12 @@ namespace INSS.ODS.WorldPay
                     config.GetSection("SiteSitting").Bind(settings);
                 });
 
+            builder.Services.AddOptions<CredentialsSettings>()
+                .Configure<IConfiguration>((settings, config) =>
+                {
+                    config.GetSection("CredentialsSettings").Bind(settings);
+                });
+
             builder.Services.AddHealthChecks();
         }
 

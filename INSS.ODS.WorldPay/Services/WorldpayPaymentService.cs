@@ -10,19 +10,24 @@ namespace INSS.ODS.WorldPay.Services
 {
     public class WorldpayPaymentService : IPaymentService
     {
-        private readonly ExternalAppSettings _settings;
+        private readonly ExternalAppSettings _externalAppSettings;
+        private readonly CredentialsSettings _credentialsSettings;
         private readonly ILogger<WorldpayPaymentService> _logger;
-        public WorldpayPaymentService(IOptions<ExternalAppSettings> options, ILogger<WorldpayPaymentService> logger)
+        public WorldpayPaymentService(IOptions<ExternalAppSettings> externalAppOptions, IOptions<CredentialsSettings> credentialOptions, ILogger<WorldpayPaymentService> logger)
         {
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            _settings = options.Value;
+            if (externalAppOptions == null) throw new ArgumentNullException(nameof(externalAppOptions));
+            if (credentialOptions == null) throw new ArgumentNullException(nameof(credentialOptions));
+
+            _externalAppSettings = externalAppOptions.Value;
+            _credentialsSettings = credentialOptions.Value;
+
             _logger = logger;
         }
 
         private HttpWebRequest CreateHttpWebRequest(string requestBody)
         {
             //Get Worldpay url from config
-            var worldpayUrl = _settings.WorldpayPaymentServiceUrl;
+            var worldpayUrl = _externalAppSettings.WorldpayPaymentServiceUrl;
 
             //Create the request to Worldpay
             var request = (HttpWebRequest)WebRequest.Create(worldpayUrl);
@@ -34,8 +39,8 @@ namespace INSS.ODS.WorldPay.Services
             request.Method = "POST";
 
             //Add Security headers
-            var username = _settings.WorldpayUsername;
-            var password = _settings.WorldpayPassword;
+            var username = _credentialsSettings.WorldpayUsername;
+            var password = _credentialsSettings.WorldpayPassword;
 
             var encoded = Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes(username + ":" + password));
             request.Headers.Add("Authorization", "Basic " + encoded);
