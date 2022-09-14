@@ -53,7 +53,7 @@ namespace INSS.ODS.WorldPay.Tests.Helpers
       <riskData>
         <authenticationRiskData authenticationMethod=""localAccount"">
           <authenticationTimestamp>
-            <date year=""2022"" month=""9"" dayOfMonth=""12"" hour=""" + currentDateTime.Hour + @""" minute=""" + currentDateTime.Minute + @""" second=""" + currentDateTime.Second + @""" />
+            <date year=""" + currentDateTime.Year + @""" month=""" + currentDateTime.Month + @""" dayOfMonth=""" + currentDateTime.Day + @""" hour=""" + currentDateTime.Hour + @""" minute=""" + currentDateTime.Minute + @""" second=""" + currentDateTime.Second + @""" />
           </authenticationTimestamp>
         </authenticationRiskData>
         <shopperAccountRiskData previousSuspiciousActivity=""false"" shippingNameMatchesAccountName=""true"" />
