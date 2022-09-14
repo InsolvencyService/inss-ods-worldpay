@@ -87,35 +87,40 @@ stages:
         condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
 
-- stage: DeployDev
-  displayName: 'Deploy to Dev'
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-  variables:
-    - group: Worldpay-Dev
-  jobs:
-    - template: deploy-jobs-template.yml
-      parameters:
-        environment: 'Dev'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
+# - stage: DeployDev
+#   displayName: 'Deploy to Dev'
+#   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+#   variables:
+#     - group: Worldpay-Dev
+#   jobs:
+#     - template: deploy-jobs-template.yml
+#       parameters:
+#         environment: 'Dev'
+#         merchantCode: $(MerchantCode)
+#         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+#         appInsightsConnectionString: $(AppInsightsConnectionString)
         
-- stage: DeploySIT
-  displayName: 'Deploy to SIT'
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-  variables:
-    - group: Worldpay-SIT
-  jobs:
-    - template: deploy-jobs-template.yml
-      parameters:
-        environment: 'SIT'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
+# - stage: DeploySIT
+#   displayName: 'Deploy to SIT'
+#   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+#   variables:
+#     - group: Worldpay-SIT
+#   jobs:
+#     - template: deploy-jobs-template.yml
+#       parameters:
+#         environment: 'SIT'
+#         merchantCode: $(MerchantCode)
+#         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+#         appInsightsConnectionString: $(AppInsightsConnectionString)
 
 - stage: DeployPreProd
+  pool:
+    name: ODS
+    demands:
+    - Agent.Name -equals preprod-uksouth-ods-ubuntu
   displayName: 'Deploy to PreProd'
-  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  #condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   variables:
     - group: Worldpay-PreProd
   jobs:
@@ -126,16 +131,16 @@ stages:
         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
         appInsightsConnectionString: $(AppInsightsConnectionString)
 
-- stage: DeployProd
-  displayName: 'Deploy to Prod'
-  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
-  variables:
-    - group: Worldpay-Prod
-  jobs:
-    - template: deploy-jobs-template.yml
-      parameters:
-        environment: 'Prod'
-        azureSubscription: 'AppServicesDevOps-Prod'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
+# - stage: DeployProd
+#   displayName: 'Deploy to Prod'
+#   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+#   variables:
+#     - group: Worldpay-Prod
+#   jobs:
+#     - template: deploy-jobs-template.yml
+#       parameters:
+#         environment: 'Prod'
+#         azureSubscription: 'AppServicesDevOps-Prod'
+#         merchantCode: $(MerchantCode)
+#         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+#         appInsightsConnectionString: $(AppInsightsConnectionString)
