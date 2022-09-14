@@ -110,7 +110,7 @@ jobs:
               inputs:
                 failOnStderr: true
                 targetType: 'filePath'
-                filePath: $(System.DefaultWorkingDirectory)\powershell\InvokeRequestWithRetry.ps1
+                filePath: $(System.DefaultWorkingDirectory)/powershell/InvokeRequestWithRetry.ps1
                 arguments: > # Use this to avoid newline characters in multi-line string
                   -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api-staging.azurewebsites.net"
                   -Method "${{ parameters.method }}"
@@ -133,7 +133,7 @@ jobs:
               inputs:
                 failOnStderr: true
                 targetType: 'filePath'
-                filePath: $(System.DefaultWorkingDirectory)\powershell\InvokeRequestWithRetry.ps1
+                filePath: $(System.DefaultWorkingDirectory)/powershell/InvokeRequestWithRetry.ps1
                 arguments: > # Use this to avoid newline characters in multi-line string
                   -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api.azurewebsites.net"
                   -Method "${{ parameters.method }}"
