@@ -76,9 +76,15 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'Dev'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        SiteSitting__MerchantCode: $(MerchantCode)
+        ExternalAppSettings__WorldPayWebAppBaseUrl: $(WorldPayWebAppBaseUrl)
+        ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
+        ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
+        ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
         appInsightsConnectionString: $(AppInsightsConnectionString)
+        CredentialsSettings__WorldpayUsername: $(worldpayUsername)
+        CredentialsSettings__WorldpayPassword: $(worldpayPassword)
+        APPINSIGHTS_INSTRUMENTATIONKEY: $(AppInsightsConnectionString)
         
 - stage: DeploySIT
   displayName: 'Deploy to SIT'
@@ -89,9 +95,15 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'SIT'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        SiteSitting__MerchantCode: $(MerchantCode)
+        ExternalAppSettings__WorldPayWebAppBaseUrl: $(WorldPayWebAppBaseUrl)
+        ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
+        ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
+        ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
         appInsightsConnectionString: $(AppInsightsConnectionString)
+        CredentialsSettings__WorldpayUsername: $(worldpayUsername)
+        CredentialsSettings__WorldpayPassword: $(worldpayPassword)
+        APPINSIGHTS_INSTRUMENTATIONKEY: $(AppInsightsConnectionString)
 
 - stage: DeployPreProd
   displayName: 'Deploy to PreProd'
@@ -102,9 +114,15 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'PreProd'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        SiteSitting__MerchantCode: $(MerchantCode)
+        ExternalAppSettings__WorldPayWebAppBaseUrl: $(WorldPayWebAppBaseUrl)
+        ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
+        ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
+        ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
         appInsightsConnectionString: $(AppInsightsConnectionString)
+        CredentialsSettings__WorldpayUsername: $(worldpayUsername)
+        CredentialsSettings__WorldpayPassword: $(worldpayPassword)
+        APPINSIGHTS_INSTRUMENTATIONKEY: $(AppInsightsConnectionString)
 
 - stage: DeployProd
   displayName: 'Deploy to Prod'
@@ -116,6 +134,12 @@ stages:
       parameters:
         environment: 'Prod'
         azureSubscription: 'AppServicesDevOps-Prod'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        SiteSitting__MerchantCode: $(MerchantCode)
+        ExternalAppSettings__WorldPayWebAppBaseUrl: $(WorldPayWebAppBaseUrl)
+        ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
+        ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
+        ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
         appInsightsConnectionString: $(AppInsightsConnectionString)
+        CredentialsSettings__WorldpayUsername: $(worldpayUsername)
+        CredentialsSettings__WorldpayPassword: $(worldpayPassword)
+        APPINSIGHTS_INSTRUMENTATIONKEY: $(AppInsightsConnectionString)
