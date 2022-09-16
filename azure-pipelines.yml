@@ -37,18 +37,9 @@ stages:
           vstsFeed: '55aed121-b2ec-4f93-be0c-66c47a84fc23/9759cc91-0c79-4700-9db6-cd44445e3b36'
 
       - task: VSBuild@1
-        displayName: Build Solution (WorldpayProxy)
+        displayName: Build Solution (INSS.ODS.WorldPay)
         inputs:
-          solution: '**/Insolvency.CommonServices.WorldpayProxy/Insolvency.CommonServices.WorldpayProxy.csproj'
-          msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.StagingDirectory)"'
-          platform: '$(buildPlatformForProjectFile)'
-          configuration: '$(buildConfiguration)'
-          maximumCpuCount: true
-
-      - task: VSBuild@1
-        displayName: Build Solution (MockWorldpay)
-        inputs:
-          solution: '**/Insolvency.CommonServices.MockWorldpay/Insolvency.CommonServices.MockWorldpay.csproj'
+          solution: '**/INSS.ODS.WorldPay/INSS.ODS.WorldPay.csproj'
           msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.StagingDirectory)"'
           platform: '$(buildPlatformForProjectFile)'
           configuration: '$(buildConfiguration)'
@@ -70,19 +61,10 @@ stages:
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Artifact (WorldpayProxy)'
         inputs:
-          targetPath: '$(Build.StagingDirectory)\Insolvency.CommonServices.WorldpayProxy.zip'
+          targetPath: '$(Build.StagingDirectory)\INSS.ODS.WorldPay.zip'
           artifact: 'Insolvency.CommonServices.WorldpayProxy'
           publishLocation: 'pipeline'
         condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish Artifact (MockWorldpay)'
-        inputs:
-          targetPath: '$(Build.StagingDirectory)\Insolvency.CommonServices.MockWorldpay.zip'
-          artifact: 'Insolvency.CommonServices.MockWorldpay'
-          publishLocation: 'pipeline'
-        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
 
 - stage: DeployDev
   displayName: 'Deploy to Dev'
@@ -93,9 +75,14 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'Dev'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
+        SiteSitting__MerchantCode: $(MerchantCode)
+        ExternalAppSettings__WorldPayWebAppBaseUrl: $(worldPayWebAppBaseUrl)
+        ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
+        ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
+        ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
+        CredentialsSettings__WorldpayUsername: $(worldpayUsername)
+        CredentialsSettings__WorldpayPassword: $(worldpayPassword)
+        APPINSIGHTS_INSTRUMENTATIONKEY: $(appInsightsConnectionString)
         
 - stage: DeploySIT
   displayName: 'Deploy to SIT'
@@ -106,9 +93,14 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'SIT'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
+        SiteSitting__MerchantCode: $(MerchantCode)
+        ExternalAppSettings__WorldPayWebAppBaseUrl: $(worldPayWebAppBaseUrl)
+        ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
+        ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
+        ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
+        CredentialsSettings__WorldpayUsername: $(worldpayUsername)
+        CredentialsSettings__WorldpayPassword: $(worldpayPassword)
+        APPINSIGHTS_INSTRUMENTATIONKEY: $(appInsightsConnectionString)
 
 - stage: DeployPreProd
   displayName: 'Deploy to PreProd'
@@ -119,9 +111,14 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'PreProd'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
+        SiteSitting__MerchantCode: $(MerchantCode)
+        ExternalAppSettings__WorldPayWebAppBaseUrl: $(worldPayWebAppBaseUrl)
+        ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
+        ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
+        ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
+        CredentialsSettings__WorldpayUsername: $(worldpayUsername)
+        CredentialsSettings__WorldpayPassword: $(worldpayPassword)
+        APPINSIGHTS_INSTRUMENTATIONKEY: $(appInsightsConnectionString)
 
 - stage: DeployProd
   displayName: 'Deploy to Prod'
@@ -133,6 +130,11 @@ stages:
       parameters:
         environment: 'Prod'
         azureSubscription: 'AppServicesDevOps-Prod'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
+        SiteSitting__MerchantCode: $(MerchantCode)
+        ExternalAppSettings__WorldPayWebAppBaseUrl: $(worldPayWebAppBaseUrl)
+        ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
+        ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
+        ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
+        CredentialsSettings__WorldpayUsername: $(worldpayUsername)
+        CredentialsSettings__WorldpayPassword: $(worldpayPassword)
+        APPINSIGHTS_INSTRUMENTATIONKEY: $(appInsightsConnectionString)
