@@ -29,30 +29,30 @@ parameters:
 
 jobs:
   - deployment:
-    displayName: Deploying Web Apps - WorldpayProxy
+    displayName: Deploying Function Apps - WorldpayProxy
     environment: ${{ parameters.environment }}
     strategy:
        runOnce:
          deploy:
           steps:
-            - task: AzureRmWebAppDeployment@4
-              displayName: 'Azure Web App Deploy'
+            - task: AzureFunctionApp@1
+              displayName: 'Azure Function App Deploy'
               inputs:
                 ConnectionType: 'AzureRM'
                 azureSubscription: ${{ parameters.azureSubscription }}
-                appType: 'webApp'
-                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                appType: 'functionApp'
+                WebAppName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
                 deployToSlotOrASE: true
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'
                 SlotName: 'staging'
-                packageForLinux: '$(Pipeline.Workspace)/**/Insolvency.CommonServices.WorldpayProxy.zip'
+                package: '$(Pipeline.Workspace)/**/*.zip'
                 RemoveAdditionalFilesFlag: true
 
             - task: AzureAppServiceSettings@1
               displayName: Apply App Service Settings
               inputs:
                 azureSubscription: ${{ parameters.azureSubscription }}
-                appName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                appName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
                 slotName: 'staging'
                 appSettings: |
                   [
@@ -98,7 +98,7 @@ jobs:
               inputs:
                 azureSubscription: ${{ parameters.azureSubscription }}
                 Action: 'Start Azure App Service'
-                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                WebAppName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'              
                 SpecifySlotOrASE: true
                 Slot: 'staging'
@@ -112,7 +112,7 @@ jobs:
                 targetType: 'filePath'
                 filePath: $(System.DefaultWorkingDirectory)\powershell\InvokeRequestWithRetry.ps1
                 arguments: > # Use this to avoid newline characters in multi-line string
-                  -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api-staging.azurewebsites.net"
+                  -URI "https://func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api-staging.azurewebsites.net"
                   -Method "${{ parameters.method }}"
                   -Retries ${{ parameters.retries }}
                   -SecondsDelay ${{ parameters.secondsDelay }}
@@ -123,7 +123,7 @@ jobs:
               inputs:
                 azureSubscription: ${{ parameters.azureSubscription }}
                 Action: 'Swap Slots'
-                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                WebAppName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'
                 SourceSlot: 'staging'
                 SwapWithProduction: true
@@ -135,7 +135,7 @@ jobs:
                 targetType: 'filePath'
                 filePath: $(System.DefaultWorkingDirectory)\powershell\InvokeRequestWithRetry.ps1
                 arguments: > # Use this to avoid newline characters in multi-line string
-                  -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api.azurewebsites.net"
+                  -URI "https://func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api.azurewebsites.net"
                   -Method "${{ parameters.method }}"
                   -Retries ${{ parameters.retries }}
                   -SecondsDelay ${{ parameters.secondsDelay }}
@@ -146,7 +146,7 @@ jobs:
               inputs:
                 azureSubscription: ${{ parameters.azureSubscription }}
                 Action: 'Stop Azure App Service'
-                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                WebAppName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'              
                 SpecifySlotOrASE: true
                 Slot: 'staging'  
