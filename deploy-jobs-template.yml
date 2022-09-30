@@ -82,7 +82,7 @@ jobs:
                       "slotSetting": false
                     },
                     {
-                      "name": ExternalAppSettings__WorldPayDtdUrl",
+                      "name": "ExternalAppSettings__WorldPayDtdUrl",
                       "value": "",
                       "slotSetting": false
                     },
