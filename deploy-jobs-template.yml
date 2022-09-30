@@ -22,11 +22,11 @@ parameters:
     default: 120
   - name: merchantCode
     type: string
-  - name: worldpayPaymentServiceUrl
-    type: string
   - name: appInsightsConnectionString
     type: string
-
+  - name: worldpayPaymentServiceUrl
+    type: string
+  
 jobs:
   - deployment:
     displayName: Deploying Function Apps - WorldpayProxy
@@ -62,27 +62,37 @@ jobs:
                       "slotSetting": false
                     },
                     {
-                      "name": "MerchantCode",
+                      "name": "SiteSitting__MerchantCode",
                       "value": "${{ parameters.merchantCode }}",
                       "slotSetting": false
                     },
                     {
-                      "name": "PaymentReceiptServiceUrl",
+                      "name": "ExternalAppSettings__WorldPayWebAppBaseUrl",
                       "value": "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-bankruptcy-api.azurewebsites.net/v1/",
                       "slotSetting": false
                     },
                     {
-                      "name": "WorldpayPassword",
-                      "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=worldpay-password)",
+                      "name": "ExternalAppSettings__PaymentReceiptServiceUrl:",
+                      "value": "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-bankruptcy-api.azurewebsites.net/v1/",
                       "slotSetting": false
                     },
                     {
-                      "name": "WorldpayPaymentServiceUrl",
+                      "name": "ExternalAppSettings__WorldpayPaymentServiceUrl",
                       "value": "${{ parameters.worldpayPaymentServiceUrl }}",
                       "slotSetting": false
                     },
                     {
-                      "name": "WorldpayUsername",
+                      "name": ExternalAppSettings__WorldPayDtdUrl",
+                      "value": "",
+                      "slotSetting": false
+                    },
+                    {
+                      "name": "CredentialsSettings__WorldpayPassword",
+                      "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=worldpay-password)",
+                      "slotSetting": false
+                    },
+                    {
+                      "name": "CredentialsSettings__WorldpayUsername",
                       "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=worldpay-username)",
                       "slotSetting": false
                     },
