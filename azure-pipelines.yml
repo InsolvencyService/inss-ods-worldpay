@@ -69,6 +69,7 @@ stages:
           publishLocation: 'pipeline'
         condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
+
 - stage: DeployDev
   displayName: 'Deploy to Dev'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
@@ -83,57 +84,44 @@ stages:
         appInsightsConnectionString: $(AppInsightsConnectionString)
         
         
-# - stage: DeploySIT
-#   displayName: 'Deploy to SIT'
-#   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-#   variables:
-#     - group: Worldpay-SIT
-#   jobs:
-#     - template: deploy-jobs-template.yml
-#       parameters:
-#         environment: 'SIT'
-#         SiteSitting__MerchantCode: $(MerchantCode)
-#         ExternalAppSettings__WorldPayWebAppBaseUrl: $(worldPayWebAppBaseUrl)
-#         ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
-#         ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
-#         ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
-#         CredentialsSettings__WorldpayUsername: $(worldpayUsername)
-#         CredentialsSettings__WorldpayPassword: $(worldpayPassword)
-#         APPINSIGHTS_INSTRUMENTATIONKEY: $(appInsightsConnectionString)
+- stage: DeploySIT
+  displayName: 'Deploy to SIT'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  variables:
+    - group: Worldpay-SIT
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'SIT'
+        merchantCode: $(MerchantCode)
+        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        appInsightsConnectionString: $(AppInsightsConnectionString)
 
-# - stage: DeployPreProd
-#   displayName: 'Deploy to PreProd'
-#   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
-#   variables:
-#     - group: Worldpay-PreProd
-#   jobs:
-#     - template: deploy-jobs-template.yml
-#       parameters:
-#         environment: 'PreProd'
-#         SiteSitting__MerchantCode: $(MerchantCode)
-#         ExternalAppSettings__WorldPayWebAppBaseUrl: $(worldPayWebAppBaseUrl)
-#         ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
-#         ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
-#         ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
-#         CredentialsSettings__WorldpayUsername: $(worldpayUsername)
-#         CredentialsSettings__WorldpayPassword: $(worldpayPassword)
-#         APPINSIGHTS_INSTRUMENTATIONKEY: $(appInsightsConnectionString)
 
-# - stage: DeployProd
-#   displayName: 'Deploy to Prod'
-#   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
-#   variables:
-#     - group: Worldpay-Prod
-#   jobs:
-#     - template: deploy-jobs-template.yml
-#       parameters:
-#         environment: 'Prod'
-#         azureSubscription: 'AppServicesDevOps-Prod'
-#         SiteSitting__MerchantCode: $(MerchantCode)
-#         ExternalAppSettings__WorldPayWebAppBaseUrl: $(worldPayWebAppBaseUrl)
-#         ExternalAppSettings__PaymentReceiptServiceUrl: $(paymentReceiptServiceUrl)
-#         ExternalAppSettings__WorldpayPaymentServiceUrl: $(worldpayPaymentServiceUrl)
-#         ExternalAppSettings__WorldPayDtdUrl: $(worldPayDtdUrl)
-#         CredentialsSettings__WorldpayUsername: $(worldpayUsername)
-#         CredentialsSettings__WorldpayPassword: $(worldpayPassword)
-#         APPINSIGHTS_INSTRUMENTATIONKEY: $(appInsightsConnectionString)
+- stage: DeployPreProd
+  displayName: 'Deploy to PreProd'
+  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  variables:
+    - group: Worldpay-PreProd
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'PreProd'
+        merchantCode: $(MerchantCode)
+        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        appInsightsConnectionString: $(AppInsightsConnectionString)
+
+        
+- stage: DeployProd
+  displayName: 'Deploy to Prod'
+  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  variables:
+    - group: Worldpay-Prod
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'Prod'
+        azureSubscription: 'AppServicesDevOps-Prod'
+        merchantCode: $(MerchantCode)
+        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+        appInsightsConnectionString: $(AppInsightsConnectionString)
