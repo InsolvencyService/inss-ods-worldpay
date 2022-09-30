@@ -122,7 +122,7 @@ jobs:
                 targetType: 'filePath'
                 filePath: $(System.DefaultWorkingDirectory)\powershell\InvokeRequestWithRetry.ps1
                 arguments: > # Use this to avoid newline characters in multi-line string
-                  -URI "https://func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api-staging.azurewebsites.net"
+                  -URI "https://func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api-staging.azurewebsites.net/api/health/ping?"
                   -Method "${{ parameters.method }}"
                   -Retries ${{ parameters.retries }}
                   -SecondsDelay ${{ parameters.secondsDelay }}
@@ -145,7 +145,7 @@ jobs:
                 targetType: 'filePath'
                 filePath: $(System.DefaultWorkingDirectory)\powershell\InvokeRequestWithRetry.ps1
                 arguments: > # Use this to avoid newline characters in multi-line string
-                  -URI "https://func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api.azurewebsites.net"
+                  -URI "https://func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api.azurewebsites.net/api/health/ping?"
                   -Method "${{ parameters.method }}"
                   -Retries ${{ parameters.retries }}
                   -SecondsDelay ${{ parameters.secondsDelay }}
