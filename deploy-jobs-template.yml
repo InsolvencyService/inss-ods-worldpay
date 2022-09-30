@@ -41,7 +41,7 @@ jobs:
                 ConnectionType: 'AzureRM'
                 azureSubscription: ${{ parameters.azureSubscription }}
                 appType: 'functionApp'
-                WebAppName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                appName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
                 deployToSlotOrASE: true
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'
                 SlotName: 'staging'
