@@ -1,5 +1,6 @@
 ﻿using INSS.ODS.WorldPay.Models;
 using System;
+using System.Globalization;
 using System.Text;
 using System.Xml;
 
@@ -57,7 +58,7 @@ namespace INSS.ODS.WorldPay.Helpers
 
                     //order content
                     writer.WriteStartElement("orderContent");
-                    writer.WriteCData($"<strong>{order.Description}: {order.OrderValue.ToString("C")}</strong>");
+                    writer.WriteCData($"<strong>{order.Description}: {order.OrderValue.ToString("C", CultureInfo.GetCultureInfo("en-GB"))}</strong>");
                     writer.WriteEndElement(); //end order content
 
                     //payment method masks
