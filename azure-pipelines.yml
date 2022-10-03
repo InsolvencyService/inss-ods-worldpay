@@ -46,12 +46,12 @@ stages:
           command: 'build'
           arguments: '--configuration $(buildConfiguration)'
       
-      # - task: DotNetCoreCLI@2
-      #   displayName: 'Run Tests'
-      #   inputs:
-      #     command: test
-      #     projects: '**/*Tests/*.csproj'
-      #     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+      - task: DotNetCoreCLI@2
+        displayName: 'Run Tests'
+        inputs:
+          command: test
+          projects: '**/*Tests/*.csproj'
+          arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
       - task: DotNetCoreCLI@2
         displayName: 'Publish Project'
@@ -111,7 +111,7 @@ stages:
         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
         appInsightsConnectionString: $(AppInsightsConnectionString)
 
-        
+
 - stage: DeployProd
   displayName: 'Deploy to Prod'
   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
