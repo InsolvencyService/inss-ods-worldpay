@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<paymentService version="1.4" merchantCode="INSSDRO">
+  <submit>
+    <order orderCode="abcd" installationId="abcd">
+      <description>some desc</description>
+      <amount currencyCode="abcd" exponent="2" value="1060" />
+      <orderContent><![CDATA[<strong>some desc: £10.60</strong>]]></orderContent>
+      <paymentMethodMask>
+        <include code="ALL" />
+      </paymentMethodMask>
+      <shopper>
+        <shopperEmailAddress>test@test.com</shopperEmailAddress>
+      </shopper>
+      <shippingAddress>
+        <address>
+          <firstName>abcd</firstName>
+          <lastName>efgh</lastName>
+          <address1>1 test street</address1>
+          <address2>test add2</address2>
+          <address3>test add3</address3>
+          <postalCode>AA1 1AA</postalCode>
+          <city>abcd</city>
+          <countryCode>abcd</countryCode>
+        </address>
+      </shippingAddress>
+      <billingAddress>
+        <address>
+          <firstName>abcd</firstName>
+          <lastName>efgh</lastName>
+          <address1>1 test street</address1>
+          <address2>test add2</address2>
+          <address3>test add3</address3>
+          <postalCode>AA1 1AA</postalCode>
+          <city>abcd</city>
+          <countryCode>abcd</countryCode>
+          <telephoneNumber>abcd</telephoneNumber>
+        </address>
+      </billingAddress>
+      <riskData>
+        <authenticationRiskData authenticationMethod="localAccount">
+          <authenticationTimestamp>
+            <date year="2022" month="5" dayOfMonth="27" hour="14" minute="26" second="1" />
+          </authenticationTimestamp>
+        </authenticationRiskData>
+        <shopperAccountRiskData previousSuspiciousActivity="false" shippingNameMatchesAccountName="true" />
+        <transactionRiskData shippingMethod="digital" deliveryTimeframe="electronicDelivery" preOrderPurchase="true" />
+      </riskData>
+    </order>
+  </submit>
+</paymentService>

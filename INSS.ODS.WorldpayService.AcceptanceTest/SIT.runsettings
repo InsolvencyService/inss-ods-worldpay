@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+	<TestRunParameters>
+		<Parameter name="BaseUrl" value="https://func-uksouth-dev-ods-worldpay-api.azurewebsites.net/api" />
+		<parameter name="APIbaseUrl" value="https://app-uksouth-sit-ods-worldpay-api.azurewebsites.net/worldpay/installationid?" />
+	</TestRunParameters>
+</RunSettings>
+
