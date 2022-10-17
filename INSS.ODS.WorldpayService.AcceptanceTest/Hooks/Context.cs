@@ -65,7 +65,7 @@ namespace TestFramework.Hooks
             content = result.Content;
             statusCode = result.StatusCode.ToString();
         }
-        public object CallPostEndpoint(string url, object requestbody)
+        public object CallPostEndpoints(string url, object requestbody)
         {
             string text = "/worldpay/1086392";
             string endpoint = (url + text);

@@ -53,7 +53,7 @@ namespace DROTestAutomation.StepDefs
             _WorldpayModel.CurrencyCode = "GBP";
             string jsonbody = JsonConvert.SerializeObject(_WorldpayModel);
             Console.WriteLine(jsonbody);
-            _context.CallPostEndpoint(EnvironmentData.BaseUrl, jsonbody);
+            _context.CallPostEndpoints(EnvironmentData.BaseUrl, jsonbody);
 
         }
 
