@@ -1,0 +1,828 @@
+{
+	"info": {
+		"_postman_id": "258beff4-388d-4432-b661-58fc44e99eba",
+		"name": "WorldPay API",
+		"description": "WorldPay API endpoints specification",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "worldpay/{installation Id}",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"OrderCode\": \"abcd\",\r\n    \"Description\": \"some desc\",\r\n    \"OrderValue\": 10.60,\r\n    \"Email\": \"test@test.com\",\r\n    \"FirstName\": \"abcd\",\r\n    \"LastName\": \"efgh\",\r\n    \"IncludeAddress\": true,\r\n    \"Address1\": \"1 test street\",\r\n    \"Address2\": \"test add2\",\r\n    \"Address3\": \"test add3\",\r\n    \"PostCode\": \"AA1 1AA\",\r\n    \"City\": \"abcd\",\r\n    \"State\": \"abcd\",\r\n    \"CountryCode\": \"abcd\",\r\n    \"TelephoneNumber\": \"abcd\",\r\n    \"CurrencyCode\": \"abcd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/worldpay/:installationId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worldpay",
+								":installationId"
+							],
+							"variable": [
+								{
+									"key": "installationId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/worldpay/:installationId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"worldpay",
+										":installationId"
+									],
+									"variable": [
+										{
+											"key": "installationId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"orderCode\": \"anim elit amet\",\n  \"redirectUrl\": \"enim ut in adipisicing\",\n  \"error\": \"laboris sint anim\"\n}"
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/worldpay/:installationId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"worldpay",
+										":installationId"
+									],
+									"variable": [
+										{
+											"key": "installationId"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Cancel Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/worldpay/:installationId/cancel/:orderCode",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worldpay",
+								":installationId",
+								"cancel",
+								":orderCode"
+							],
+							"variable": [
+								{
+									"key": "installationId"
+								},
+								{
+									"key": "orderCode"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/worldpay/:installationId/cancel/:orderCode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"worldpay",
+										":installationId",
+										"cancel",
+										":orderCode"
+									],
+									"variable": [
+										{
+											"key": "installationId"
+										},
+										{
+											"key": "orderCode"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"orderCode\": \"anim elit amet\",\n  \"redirectUrl\": \"enim ut in adipisicing\",\n  \"error\": \"laboris sint anim\"\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/worldpay/:installationId/cancel/:orderCode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"worldpay",
+										":installationId",
+										"cancel",
+										":orderCode"
+									],
+									"variable": [
+										{
+											"key": "installationId"
+										},
+										{
+											"key": "orderCode"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/worldpay/:installationId/cancel/:orderCode",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"worldpay",
+										":installationId",
+										"cancel",
+										":orderCode"
+									],
+									"variable": [
+										{
+											"key": "installationId"
+										},
+										{
+											"key": "orderCode"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Refund Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/worldpay/:installationId/refund",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worldpay",
+								":installationId",
+								"refund"
+							],
+							"variable": [
+								{
+									"key": "installationId"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/worldpay/:installationId/refund",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"worldpay",
+										":installationId",
+										"refund"
+									],
+									"variable": [
+										{
+											"key": "installationId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"orderCode\": \"anim elit amet\",\n  \"redirectUrl\": \"enim ut in adipisicing\",\n  \"error\": \"laboris sint anim\"\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/worldpay/:installationId/refund",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"worldpay",
+										":installationId",
+										"refund"
+									],
+									"variable": [
+										{
+											"key": "installationId"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/worldpay/:installationId/refund",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"worldpay",
+										":installationId",
+										"refund"
+									],
+									"variable": [
+										{
+											"key": "installationId"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "health",
+			"item": [
+				{
+					"name": "Get service and dependencies health status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Get service and dependencies health status"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"serviceName\": \"commodo ad in dolor\",\n  \"serviceStatus\": \"ea\",\n  \"duration\": {\n    \"ticks\": -77546883,\n    \"days\": 71447679,\n    \"hours\": 45755925,\n    \"milliseconds\": -51934997,\n    \"minutes\": 14947224,\n    \"seconds\": -7004832,\n    \"totalDays\": -5367163.037221804,\n    \"totalHours\": 34294449.819511026,\n    \"totalMilliseconds\": 59278169.070272356,\n    \"totalMinutes\": -42584300.32080791,\n    \"totalSeconds\": -59863930.23140813\n  },\n  \"details\": [\n    {\n      \"name\": \"enim officia ut amet\",\n      \"status\": \"eiusmod\",\n      \"duration\": {\n        \"ticks\": -5904078,\n        \"days\": -74074404,\n        \"hours\": -28345943,\n        \"milliseconds\": 20563207,\n        \"minutes\": -85070673,\n        \"seconds\": -89774882,\n        \"totalDays\": -20835896.327422082,\n        \"totalHours\": 72244502.65220982,\n        \"totalMilliseconds\": 46621082.17642197,\n        \"totalMinutes\": 31589810.51828435,\n        \"totalSeconds\": 72025886.06869939\n      },\n      \"description\": \"laboris minim esse\",\n      \"error\": \"sit et Duis velit\"\n    },\n    {\n      \"name\": \"cupidatat aliqua\",\n      \"status\": \"f\",\n      \"duration\": {\n        \"ticks\": 97061973,\n        \"days\": 4189117,\n        \"hours\": 12730198,\n        \"milliseconds\": -58561100,\n        \"minutes\": -92749533,\n        \"seconds\": -55538273,\n        \"totalDays\": -73791378.64085062,\n        \"totalHours\": -85760955.07291171,\n        \"totalMilliseconds\": 91380512.39138117,\n        \"totalMinutes\": -16121631.902144223,\n        \"totalSeconds\": 92473222.52237886\n      },\n      \"description\": \"dolor laboris Ut velit\",\n      \"error\": \"sed eu mollit dolor\"\n    }\n  ]\n}"
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"serviceName\": \"ut reprehenderit occaecat ad\",\n  \"serviceStatus\": \"minim\",\n  \"duration\": {\n    \"ticks\": -54410752,\n    \"days\": 5030637,\n    \"hours\": -77209420,\n    \"milliseconds\": -69238997,\n    \"minutes\": -24763639,\n    \"seconds\": -74410058,\n    \"totalDays\": 81304351.1714069,\n    \"totalHours\": 75226754.01683342,\n    \"totalMilliseconds\": 24311502.084890917,\n    \"totalMinutes\": 95859822.1861248,\n    \"totalSeconds\": 50225813.71333575\n  },\n  \"details\": [\n    {\n      \"name\": \"aliqua sit dolore Excepteur laborum\",\n      \"status\": \"dolore culpa consectetur et\",\n      \"duration\": {\n        \"ticks\": 41349919,\n        \"days\": 49590653,\n        \"hours\": 19730783,\n        \"milliseconds\": 98146102,\n        \"minutes\": -34016948,\n        \"seconds\": 73482755,\n        \"totalDays\": 62971849.10264143,\n        \"totalHours\": -86093668.74882811,\n        \"totalMilliseconds\": 74446303.85328108,\n        \"totalMinutes\": 60283772.256481916,\n        \"totalSeconds\": 2178617.847795114\n      },\n      \"description\": \"ullamco ut enim eiusmod\",\n      \"error\": \"dolor laboris in\"\n    },\n    {\n      \"name\": \"nostrud adipisicing quis Lorem\",\n      \"status\": \"dolor ipsum Excepteur in\",\n      \"duration\": {\n        \"ticks\": -83783943,\n        \"days\": -56005034,\n        \"hours\": 34605011,\n        \"milliseconds\": -945594,\n        \"minutes\": 56131397,\n        \"seconds\": -86173141,\n        \"totalDays\": -63193915.32668988,\n        \"totalHours\": 61735075.89237574,\n        \"totalMilliseconds\": -17587298.8739831,\n        \"totalMinutes\": 40174343.01198897,\n        \"totalSeconds\": 10102350.998321354\n      },\n      \"description\": \"irure pari\",\n      \"error\": \"eu nostrud et velit ipsum\"\n    }\n  ]\n}"
+						},
+						{
+							"name": "Service Not Available",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/health",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "Service Unavailable",
+							"code": 503,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"serviceName\": \"ut reprehenderit occaecat ad\",\n  \"serviceStatus\": \"minim\",\n  \"duration\": {\n    \"ticks\": -54410752,\n    \"days\": 5030637,\n    \"hours\": -77209420,\n    \"milliseconds\": -69238997,\n    \"minutes\": -24763639,\n    \"seconds\": -74410058,\n    \"totalDays\": 81304351.1714069,\n    \"totalHours\": 75226754.01683342,\n    \"totalMilliseconds\": 24311502.084890917,\n    \"totalMinutes\": 95859822.1861248,\n    \"totalSeconds\": 50225813.71333575\n  },\n  \"details\": [\n    {\n      \"name\": \"aliqua sit dolore Excepteur laborum\",\n      \"status\": \"dolore culpa consectetur et\",\n      \"duration\": {\n        \"ticks\": 41349919,\n        \"days\": 49590653,\n        \"hours\": 19730783,\n        \"milliseconds\": 98146102,\n        \"minutes\": -34016948,\n        \"seconds\": 73482755,\n        \"totalDays\": 62971849.10264143,\n        \"totalHours\": -86093668.74882811,\n        \"totalMilliseconds\": 74446303.85328108,\n        \"totalMinutes\": 60283772.256481916,\n        \"totalSeconds\": 2178617.847795114\n      },\n      \"description\": \"ullamco ut enim eiusmod\",\n      \"error\": \"dolor laboris in\"\n    },\n    {\n      \"name\": \"nostrud adipisicing quis Lorem\",\n      \"status\": \"dolor ipsum Excepteur in\",\n      \"duration\": {\n        \"ticks\": -83783943,\n        \"days\": -56005034,\n        \"hours\": 34605011,\n        \"milliseconds\": -945594,\n        \"minutes\": 56131397,\n        \"seconds\": -86173141,\n        \"totalDays\": -63193915.32668988,\n        \"totalHours\": 61735075.89237574,\n        \"totalMilliseconds\": -17587298.8739831,\n        \"totalMinutes\": 40174343.01198897,\n        \"totalSeconds\": 10102350.998321354\n      },\n      \"description\": \"irure pari\",\n      \"error\": \"eu nostrud et velit ipsum\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get service health status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/health/ping",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"health",
+								"ping"
+							]
+						},
+						"description": "Get service health status"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/health/ping",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"health",
+										"ping"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"statusCode\": 37686417\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Make Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/xml; charset=utf-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!DOCTYPE paymentService PUBLIC \" -//WorldPay//DTD WorldPay PaymentService v1//EN\" \"http://dtd.worldpay.com/paymentService_v1.dtd\">\r\n<paymentService version=\"1.4\" merchantCode=\"INSSDRO\">\r\n  <submit>\r\n    <order orderCode=\"ADJ0001151-0053\" installationId=\"1086392\">\r\n      <description>Bankruptcy Order Fee Payment</description>\r\n      <amount currencyCode=\"GBP\" exponent=\"2\" value=\"500\" />\r\n      <orderContent><![CDATA[<strong>Bankruptcy Order Fee Payment: £5.00</strong>]]></orderContent>\r\n      <paymentMethodMask>\r\n        <include code=\"ALL\" />\r\n      </paymentMethodMask>\r\n      <shopper>\r\n        <shopperEmailAddress>test@testing.com</shopperEmailAddress>\r\n      </shopper>\r\n      <shippingAddress>\r\n        <address>\r\n          <firstName>Steve</firstName>\r\n          <lastName>Jones</lastName>\r\n          <address1>37 Boundary House</address1>\r\n          <address2>Boundary Lane</address2>\r\n          <address3 />\r\n          <postalCode>AL7 4EH</postalCode>\r\n          <city>Welwyn Garden City</city>\r\n          <countryCode>GB</countryCode>\r\n        </address>\r\n      </shippingAddress>\r\n      <billingAddress>\r\n        <address>\r\n          <firstName>Steve</firstName>\r\n          <lastName>Jones</lastName>\r\n          <address1>37 Boundary House</address1>\r\n          <address2>Boundary Lane</address2>\r\n          <address3 />\r\n          <postalCode>AL7 4EH</postalCode>\r\n          <city>Welwyn Garden City</city>\r\n          <countryCode>GB</countryCode>\r\n          <telephoneNumber />\r\n        </address>\r\n      </billingAddress>\r\n      <riskData>\r\n        <authenticationRiskData authenticationMethod=\"localAccount\">\r\n          <authenticationTimestamp>\r\n            <date year=\"2020\" month=\"7\" dayOfMonth=\"31\" hour=\"11\" minute=\"54\" second=\"33\" />\r\n          </authenticationTimestamp>\r\n        </authenticationRiskData>\r\n        <shopperAccountRiskData previousSuspiciousActivity=\"false\" shippingNameMatchesAccountName=\"true\" />\r\n        <transactionRiskData shippingMethod=\"digital\" deliveryTimeframe=\"electronicDelivery\" preOrderPurchase=\"true\" />\r\n      </riskData>\r\n    </order>\r\n  </submit>\r\n</paymentService>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/PaymentService",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"PaymentService"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/PaymentService",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"PaymentService"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<element>(string)</element>"
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/PaymentService",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"PaymentService"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Order Proxy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/xml; charset=utf-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<paymentService version=\"1.4\" merchantCode=\"INSSDRO\">\r\n  <submit>\r\n    <order orderCode=\"abcd\" installationId=\"abcd\">\r\n      <description>some desc</description>\r\n      <amount currencyCode=\"abcd\" exponent=\"2\" value=\"1060\" />\r\n      <orderContent><![CDATA[<strong>some desc: £10.60</strong>]]></orderContent>\r\n      <paymentMethodMask>\r\n        <include code=\"ALL\" />\r\n      </paymentMethodMask>\r\n      <shopper>\r\n        <shopperEmailAddress>test@test.com</shopperEmailAddress>\r\n      </shopper>\r\n      <shippingAddress>\r\n        <address>\r\n          <firstName>abcd</firstName>\r\n          <lastName>efgh</lastName>\r\n          <address1>1 test street</address1>\r\n          <address2>test add2</address2>\r\n          <address3>test add3</address3>\r\n          <postalCode>AA1 1AA</postalCode>\r\n          <city>abcd</city>\r\n          <countryCode>abcd</countryCode>\r\n        </address>\r\n      </shippingAddress>\r\n      <billingAddress>\r\n        <address>\r\n          <firstName>abcd</firstName>\r\n          <lastName>efgh</lastName>\r\n          <address1>1 test street</address1>\r\n          <address2>test add2</address2>\r\n          <address3>test add3</address3>\r\n          <postalCode>AA1 1AA</postalCode>\r\n          <city>abcd</city>\r\n          <countryCode>abcd</countryCode>\r\n          <telephoneNumber>abcd</telephoneNumber>\r\n        </address>\r\n      </billingAddress>\r\n      <riskData>\r\n        <authenticationRiskData authenticationMethod=\"localAccount\">\r\n          <authenticationTimestamp>\r\n            <date year=\"2022\" month=\"5\" dayOfMonth=\"27\" hour=\"14\" minute=\"26\" second=\"1\" />\r\n          </authenticationTimestamp>\r\n        </authenticationRiskData>\r\n        <shopperAccountRiskData previousSuspiciousActivity=\"false\" shippingNameMatchesAccountName=\"true\" />\r\n        <transactionRiskData shippingMethod=\"digital\" deliveryTimeframe=\"electronicDelivery\" preOrderPurchase=\"true\" />\r\n      </riskData>\r\n    </order>\r\n  </submit>\r\n</paymentService>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/proxy",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"proxy"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/proxy",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<element>(string)</element>"
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/proxy",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"proxy"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Update Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<paymentService version=\"1.4\">\r\n  <notify>\r\n    <orderStatusEvent orderCode=\"abcd\">\r\n      <payment>\r\n        <paymentMethod>ECMC-SSL</paymentMethod>\r\n        <amount value=\"1060\" currencyCode=\"abcd\" exponent=\"2\" debitCreditIndicator=\"credit\" />\r\n        <lastEvent>khddh</lastEvent>\r\n        <balance accountType=\"IN_PROCESS_AUTHORISED\">\r\n          <amount value=\"1060\" currencyCode=\"abcd\" exponent=\"2\" debitCreditIndicator=\"credit\" />\r\n        </balance>\r\n        <cardNumber>5255********2490</cardNumber>\r\n        <riskScore>0</riskScore>\r\n      </payment>\r\n    </orderStatusEvent>\r\n  </notify>\r\n</paymentService>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orderupdate",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orderupdate"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orderupdate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orderupdate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "\"<element>(string)</element>\""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/orderupdate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orderupdate"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:7106/api",
+			"type": "string"
+		}
+	]
+}
