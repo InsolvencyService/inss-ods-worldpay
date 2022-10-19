@@ -20,16 +20,12 @@ parameters:
   - name: timeoutSec
     type: number
     default: 120
-  - name: merchantCode
-    type: string
-  - name: worldpayPaymentServiceUrl
-    type: string
   - name: appInsightsConnectionString
     type: string
 
 jobs:
   - deployment:
-    displayName: Deploying Web Apps - WorldpayProxy
+    displayName: Deploying Web Apps - MockWorldpay
     environment: ${{ parameters.environment }}
     strategy:
        runOnce:
@@ -41,49 +37,24 @@ jobs:
                 ConnectionType: 'AzureRM'
                 azureSubscription: ${{ parameters.azureSubscription }}
                 appType: 'webApp'
-                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-mock-worldpay-api'
                 deployToSlotOrASE: true
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'
                 SlotName: 'staging'
-                packageForLinux: '$(Pipeline.Workspace)/**/Insolvency.CommonServices.WorldpayProxy.zip'
+                packageForLinux: '$(Pipeline.Workspace)/**/Insolvency.CommonServices.MockWorldpay.zip'
                 RemoveAdditionalFilesFlag: true
 
             - task: AzureAppServiceSettings@1
               displayName: Apply App Service Settings
               inputs:
                 azureSubscription: ${{ parameters.azureSubscription }}
-                appName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                appName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-mock-worldpay-api'
                 slotName: 'staging'
                 appSettings: |
                   [
                     {
                       "name": "Environ",
                       "value": "${{ lower(parameters.environment) }}",
-                      "slotSetting": false
-                    },
-                    {
-                      "name": "MerchantCode",
-                      "value": "${{ parameters.merchantCode }}",
-                      "slotSetting": false
-                    },
-                    {
-                      "name": "PaymentReceiptServiceUrl",
-                      "value": "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-bankruptcy-api.azurewebsites.net/v1/",
-                      "slotSetting": false
-                    },
-                    {
-                      "name": "WorldpayPassword",
-                      "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=worldpay-password)",
-                      "slotSetting": false
-                    },
-                    {
-                      "name": "WorldpayPaymentServiceUrl",
-                      "value": "${{ parameters.worldpayPaymentServiceUrl }}",
-                      "slotSetting": false
-                    },
-                    {
-                      "name": "WorldpayUsername",
-                      "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=worldpay-username)",
                       "slotSetting": false
                     },
                     {
@@ -98,7 +69,7 @@ jobs:
               inputs:
                 azureSubscription: ${{ parameters.azureSubscription }}
                 Action: 'Start Azure App Service'
-                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-mock-worldpay-api'
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'              
                 SpecifySlotOrASE: true
                 Slot: 'staging'
@@ -112,7 +83,7 @@ jobs:
                 targetType: 'filePath'
                 filePath: $(System.DefaultWorkingDirectory)\powershell\InvokeRequestWithRetry.ps1
                 arguments: > # Use this to avoid newline characters in multi-line string
-                  -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api-staging.azurewebsites.net"
+                  -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-mock-worldpay-api-staging.azurewebsites.net"
                   -Method "${{ parameters.method }}"
                   -Retries ${{ parameters.retries }}
                   -SecondsDelay ${{ parameters.secondsDelay }}
@@ -123,7 +94,7 @@ jobs:
               inputs:
                 azureSubscription: ${{ parameters.azureSubscription }}
                 Action: 'Swap Slots'
-                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-mock-worldpay-api'
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'
                 SourceSlot: 'staging'
                 SwapWithProduction: true
@@ -135,7 +106,7 @@ jobs:
                 targetType: 'filePath'
                 filePath: $(System.DefaultWorkingDirectory)\powershell\InvokeRequestWithRetry.ps1
                 arguments: > # Use this to avoid newline characters in multi-line string
-                  -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api.azurewebsites.net"
+                  -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-mock-worldpay-api.azurewebsites.net"
                   -Method "${{ parameters.method }}"
                   -Retries ${{ parameters.retries }}
                   -SecondsDelay ${{ parameters.secondsDelay }}
@@ -146,7 +117,7 @@ jobs:
               inputs:
                 azureSubscription: ${{ parameters.azureSubscription }}
                 Action: 'Stop Azure App Service'
-                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-mock-worldpay-api'
                 ResourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-common'              
                 SpecifySlotOrASE: true
                 Slot: 'staging'  

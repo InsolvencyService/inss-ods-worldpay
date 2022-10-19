@@ -40,15 +40,6 @@ stages:
           vstsFeed: '55aed121-b2ec-4f93-be0c-66c47a84fc23/9759cc91-0c79-4700-9db6-cd44445e3b36'
 
       - task: VSBuild@1
-        displayName: Build Solution (WorldpayProxy)
-        inputs:
-          solution: '**/Insolvency.CommonServices.WorldpayProxy/Insolvency.CommonServices.WorldpayProxy.csproj'
-          msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.StagingDirectory)"'
-          platform: '$(buildPlatformForProjectFile)'
-          configuration: '$(buildConfiguration)'
-          maximumCpuCount: true
-
-      - task: VSBuild@1
         displayName: Build Solution (MockWorldpay)
         inputs:
           solution: '**/Insolvency.CommonServices.MockWorldpay/Insolvency.CommonServices.MockWorldpay.csproj'
@@ -71,21 +62,12 @@ stages:
           configuration: '$(buildConfiguration)'
 
       - task: PublishPipelineArtifact@1
-        displayName: 'Publish Artifact (WorldpayProxy)'
-        inputs:
-          targetPath: '$(Build.StagingDirectory)\Insolvency.CommonServices.WorldpayProxy.zip'
-          artifact: 'Insolvency.CommonServices.WorldpayProxy'
-          publishLocation: 'pipeline'
-        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
-      - task: PublishPipelineArtifact@1
         displayName: 'Publish Artifact (MockWorldpay)'
         inputs:
           targetPath: '$(Build.StagingDirectory)\Insolvency.CommonServices.MockWorldpay.zip'
           artifact: 'Insolvency.CommonServices.MockWorldpay'
           publishLocation: 'pipeline'
         condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
 
 - stage: DeployDev
   displayName: 'Deploy to Dev'
@@ -96,46 +78,46 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'Dev'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
         appInsightsConnectionString: $(AppInsightsConnectionString)
+#        merchantCode: $(MerchantCode)
+#        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
         
-- stage: DeploySIT
-  displayName: 'Deploy to SIT'
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-  variables:
-    - group: Worldpay-SIT
-  jobs:
-    - template: deploy-jobs-template.yml
-      parameters:
-        environment: 'SIT'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
-
-- stage: DeployPreProd
-  displayName: 'Deploy to PreProd'
-  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
-  variables:
-    - group: Worldpay-PreProd
-  jobs:
-    - template: deploy-jobs-template.yml
-      parameters:
-        environment: 'PreProd'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
-
-- stage: DeployProd
-  displayName: 'Deploy to Prod'
-  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
-  variables:
-    - group: Worldpay-Prod
-  jobs:
-    - template: deploy-jobs-template.yml
-      parameters:
-        environment: 'Prod'
-        azureSubscription: 'AppServicesDevOps-Prod'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
+## - stage: DeploySIT
+##   displayName: 'Deploy to SIT'
+##   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+##   variables:
+##     - group: Worldpay-SIT
+##   jobs:
+##     - template: deploy-jobs-template.yml
+##       parameters:
+##         environment: 'SIT'
+##         merchantCode: $(MerchantCode)
+##         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+##         appInsightsConnectionString: $(AppInsightsConnectionString)
+## 
+## - stage: DeployPreProd
+##   displayName: 'Deploy to PreProd'
+##   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+##   variables:
+##     - group: Worldpay-PreProd
+##   jobs:
+##     - template: deploy-jobs-template.yml
+##       parameters:
+##         environment: 'PreProd'
+##         merchantCode: $(MerchantCode)
+##         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+##         appInsightsConnectionString: $(AppInsightsConnectionString)
+## 
+## - stage: DeployProd
+##   displayName: 'Deploy to Prod'
+##   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+##   variables:
+##     - group: Worldpay-Prod
+##   jobs:
+##     - template: deploy-jobs-template.yml
+##       parameters:
+##         environment: 'Prod'
+##         azureSubscription: 'AppServicesDevOps-Prod'
+##         merchantCode: $(MerchantCode)
+##         worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
+##         appInsightsConnectionString: $(AppInsightsConnectionString)
