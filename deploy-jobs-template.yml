@@ -72,7 +72,7 @@ jobs:
                       "slotSetting": false
                     },
                     {
-                      "name": "ExternalAppSettings__PaymentReceiptServiceUrl:",
+                      "name": "ExternalAppSettings__PaymentReceiptServiceUrl",
                       "value": "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-bankruptcy-api.azurewebsites.net/v1/",
                       "slotSetting": false
                     },
