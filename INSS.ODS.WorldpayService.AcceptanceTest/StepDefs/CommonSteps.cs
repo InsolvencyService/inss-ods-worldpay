@@ -6,7 +6,6 @@ using AventStack.ExtentReports;
 using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
 using TestFramework.Hooks;
-using INSS.ODS.WorldpayService.AcceptanceTest;
 
 
 
@@ -32,25 +31,18 @@ namespace DROTestAutomation.StepDefs
         [When(@"a get request is made using (.*)")]
         public void WhenAGetRequestIsMadeUsing(string resources)
         {
-            _context.GetMethod(EnvironmentData.BaseUrl, resources);
+            _context.GetMethod(DataAppSetting.InitConfiguration()["BaseUrl"], resources);
             scenario = feature.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
 
         }
         [Given(@"I navigate to DRO Login page")]
         public void GivenINavigateToDROLoginPage()
         {
-            _context.LoadApplication(EnvironmentData.BaseUrl);
+            _context.LoadApplication();
             scenario = feature.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
 
         }
 
-        //[Given(@"I navigate to DRO Login page")]
-        //public void GivenScenario()
-        //{
-        //    _context.LoadDROApplication();
-        //    scenario = feature.CreateNode<Scenario>(_scenarioContext.ScenarioInfo.Title);
-
-        //}
 
         [BeforeTestRun]
         public static void ReportGenerator()

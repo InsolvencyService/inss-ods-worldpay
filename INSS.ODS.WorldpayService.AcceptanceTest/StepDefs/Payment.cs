@@ -10,6 +10,7 @@ using System.Xml;
 using System.Threading;
 using RestSharp.Serializers;
 using System.Xml.Linq;
+using RestSharp;
 
 namespace DROTestAutomation.StepDefs
 {
@@ -34,7 +35,6 @@ namespace DROTestAutomation.StepDefs
         [When(@"a post request is made to initiate payment using '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)' '([^']*)'")]
         public void WhenAPostRequestIsMadeToInitiatePaymentUsingOrderCodeDescriptionOrderValueEmailFirstNameLastNameIncludeAddressAddressPostCodeCityTelephoneNumber(string OrderCode, string Description, string OrderValue, string Email, string FirstName, string LastName, string IncludeAddress, string Address1, string PostCode, string City, string TelephoneNumber)
         {
-            Thread.Sleep(3000);
             _WorldpayModel.OrderCode = OrderCode;
             _WorldpayModel.Description = Description;
             _WorldpayModel.OrderValue = OrderValue;
@@ -53,7 +53,7 @@ namespace DROTestAutomation.StepDefs
             _WorldpayModel.CurrencyCode = "GBP";
             string jsonbody = JsonConvert.SerializeObject(_WorldpayModel);
             Console.WriteLine(jsonbody);
-            _context.CallPostEndpoints(EnvironmentData.BaseUrl, jsonbody);
+            _context.CallPostEndpointswithresources(DataAppSetting.InitConfiguration()["BaseUrl"], DataAppSetting.InitConfiguration()["WorldPayment"], jsonbody);
 
         }
 
@@ -67,34 +67,33 @@ namespace DROTestAutomation.StepDefs
         public void ThenTheContentOfTheUrlIsValidated()
         {
             var result = JsonConvert.DeserializeObject<ResponseModel>(_context.content);
-            Assert.That(result.RedirectUrl, Does.Contain("https://payments-test.worldpay.com/app/hpp/integration/wpg/corporate?OrderKey=INSSDRO"), " test failed");
+            Assert.That(result.RedirectUrl, Does.Contain("https://app-uksouth-dev-ods-mock-worldpay-api.azurewebsites.net/selectpaymentmethod?orderKey=INSSDRO^abck"), " test failed");
         }
 
         [When(@"a post request is made to refund payment using '([^']*)' '([^']*)'")]
         public void WhenAPostRequestIsMadeToRefundPaymentUsing(string orderCode, string amount)
         {
-            Thread.Sleep(4000);
+           
             _WorldpayModel.OrderCode = orderCode;
             _WorldpayModel.CurrencyCode = "GBP";
             _WorldpayModel.RefundValue = amount;
             string jsonbody = JsonConvert.SerializeObject(_WorldpayModel);
-            _context.CallRefundEndpoint(EnvironmentData.BaseUrl, jsonbody);
+            _context.CallPostEndpointswithresources(DataAppSetting.InitConfiguration()["BaseUrl"], DataAppSetting.InitConfiguration()["RefundPayment"], jsonbody);
 
         }
 
         [When(@"a post request is made to cancel payment")]
         public void WhenAPostRequestIsMadeToCancelPayment()
         {
-            Thread.Sleep(4000);
+           
             string jsonbody = JsonConvert.SerializeObject(_WorldpayModel);
-            _context.CallCancelEndpoint(EnvironmentData.BaseUrl, jsonbody);
+            _context.CallPostEndpointswithresources(DataAppSetting.InitConfiguration()["BaseUrl"], DataAppSetting.InitConfiguration()["WorldPay"], jsonbody);
         }
 
         [When(@"a get request for payment health check is sent with (.*)")]
         public void WhenAGetRequestForPaymentHealthCheckIsSentWithTest(string resources)
         {
-            Thread.Sleep(4000);
-            _context.GetMethod(EnvironmentData.BaseUrl, resources);
+            _context.GetMethod(DataAppSetting.InitConfiguration()["BaseUrl"], resources);
 
         }
 
@@ -108,23 +107,32 @@ namespace DROTestAutomation.StepDefs
         [When(@"a post request is made to proxy payment")]
         public void WhenAPostRequestIsMadeToProxyPayment()
         {
-            Thread.Sleep(3000);
             string path = Path.GetFullPath("Proxy.xml");
             XDocument doc = XDocument.Load(path);
 
-            _context.CallXmlPostProxyEndpoint(EnvironmentData.BaseUrl, doc);
+            _context.CallXmlPostProxyEndpoint(DataAppSetting.InitConfiguration()["BaseUrl"], DataAppSetting.InitConfiguration()["OrderProxy"], doc);
         }
+
+        [When(@"a post request is made to update order")]
+        public void WhenAPostRequestIsMadeToUpdateOrder()
+        {
+            string path = Path.GetFullPath("UpdateOrder.xml");
+            XDocument doc = XDocument.Load(path);
+
+            _context.CallXmlPostProxyEndpoint(DataAppSetting.InitConfiguration()["BaseUrl"], DataAppSetting.InitConfiguration()["OrderUpdate"], doc);
+        }
+
         [When(@"a post request is made to make payment")]
         public void WhenAPostRequestIsMadeToMakePayment()
         {
-            Thread.Sleep(3000);
             string path = Path.GetFullPath("MakePayment.xml");
             XDocument doc = XDocument.Load(path);
-            _context.CallXmlPostMakePaymentEndpoint(EnvironmentData.BaseUrl, doc);
+            _context.CallXmlPostProxyEndpoint(DataAppSetting.InitConfiguration()["BaseUrl"], DataAppSetting.InitConfiguration()["PaymentService"], doc);
         }
 
     }
 }
+
 
 
 

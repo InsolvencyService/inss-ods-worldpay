@@ -24,6 +24,10 @@ Scenario: Order Proxy
 	When a post request is made to proxy payment
 	Then the response status code is OK
 
+Scenario: Update Order
+	When a post request is made to update order
+	Then the response status code is OK
+
 Scenario: Make Payment
 	When a post request is made to make payment
 	Then the response status code is OK
