@@ -22,11 +22,12 @@ Scenario: Cancel order
 
 Scenario: Order Proxy
 	When a post request is made to proxy payment
-	Then the response status code is OK
+	Then the response status code is 
 
-Scenario: Update Order
-	When a post request is made to update order
-	Then the response status code is OK
+#Commenting test for update order out as Ben confirmed it's not being used anywhere in the code
+#Scenario: Update Order
+#	When a post request is made to update order
+#	Then the response status code is OK
 
 Scenario: Make Payment
 	When a post request is made to make payment
