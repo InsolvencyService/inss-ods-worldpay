@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE paymentService PUBLIC " -//WorldPay//DTD WorldPay PaymentService v1//EN" "http://dtd.worldpay.com/paymentService_v1.dtd">
+<paymentService version="1.4" merchantCode="INSSDRO">
+  <submit>
+    <order orderCode="abck" installationId="1086392">
+      <description>Bankruptcy Order Fee Payment</description>
+      <amount currencyCode="GBP" exponent="2" value="500" />
+      <orderContent><![CDATA[<strong>Bankruptcy Order Fee Payment: £5.00</strong>]]></orderContent>
+      <paymentMethodMask>
+        <include code="ALL" />
+      </paymentMethodMask>
+      <shopper>
+        <shopperEmailAddress>test@testing.com</shopperEmailAddress>
+      </shopper>
+      <shippingAddress>
+        <address>
+          <firstName>Steve</firstName>
+          <lastName>Jones</lastName>
+          <address1>37 Boundary House</address1>
+          <address2>Boundary Lane</address2>
+          <address3 />
+          <postalCode>AL7 4EH</postalCode>
+          <city>Welwyn Garden City</city>
+          <countryCode>GB</countryCode>
+        </address>
+      </shippingAddress>
+      <billingAddress>
+        <address>
+          <firstName>Steve</firstName>
+          <lastName>Jones</lastName>
+          <address1>37 Boundary House</address1>
+          <address2>Boundary Lane</address2>
+          <address3 />
+          <postalCode>AL7 4EH</postalCode>
+          <city>Welwyn Garden City</city>
+          <countryCode>GB</countryCode>
+          <telephoneNumber />
+        </address>
+      </billingAddress>
+      <riskData>
+        <authenticationRiskData authenticationMethod="localAccount">
+          <authenticationTimestamp>
+            <date year="2020" month="7" dayOfMonth="31" hour="11" minute="54" second="33" />
+          </authenticationTimestamp>
+        </authenticationRiskData>
+        <shopperAccountRiskData previousSuspiciousActivity="false" shippingNameMatchesAccountName="true" />
+        <transactionRiskData shippingMethod="digital" deliveryTimeframe="electronicDelivery" preOrderPurchase="true" />
+      </riskData>
+    </order>
+  </submit>
+</paymentService>
