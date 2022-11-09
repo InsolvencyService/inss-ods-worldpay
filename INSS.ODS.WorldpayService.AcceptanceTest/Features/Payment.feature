@@ -22,7 +22,7 @@ Scenario: Cancel order
 
 Scenario: Order Proxy
 	When a post request is made to proxy payment
-	Then the response status code is 
+	Then the response status code is OK
 
 #Commenting test for update order out as Ben confirmed it's not being used anywhere in the code
 #Scenario: Update Order
