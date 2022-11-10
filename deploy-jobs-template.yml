@@ -20,12 +20,6 @@ parameters:
   - name: timeoutSec
     type: number
     default: 120
-  - name: merchantCode
-    type: string
-  - name: appInsightsConnectionString
-    type: string
-  - name: worldpayPaymentServiceUrl
-    type: string
   
 jobs:
   - deployment:
@@ -63,7 +57,7 @@ jobs:
                     },
                     {
                       "name": "SiteSitting__MerchantCode",
-                      "value": "${{ parameters.merchantCode }}",
+                      "value": "$(MerchantCode)",
                       "slotSetting": false
                     },
                     {
@@ -78,7 +72,7 @@ jobs:
                     },
                     {
                       "name": "ExternalAppSettings__WorldpayPaymentServiceUrl",
-                      "value": "${{ parameters.worldpayPaymentServiceUrl }}",
+                      "value": "$(WorldpayPaymentServiceUrl)",
                       "slotSetting": false
                     },
                     {
@@ -98,8 +92,23 @@ jobs:
                     },
                     {
                       "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                      "value": "${{ parameters.appInsightsConnectionString }}",
+                      "value": "$(AppInsightsConnectionString)",
                       "slotSetting": false
+                    }
+                  ]
+                
+            - task: AzureAppServiceSettings@1
+              displayName: Apply App Service Settings
+              inputs:
+                azureSubscription: ${{ parameters.azureSubscription }}
+                appName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
+                slotName: 'production'
+                appSettings: |
+                  [
+                    {
+                      "name": "AzureFunctionsWebHost__hostid",
+                      "value": "$(HostId)",
+                      "slotSetting": true
                     }
                   ]
       
