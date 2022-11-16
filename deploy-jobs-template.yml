@@ -96,22 +96,7 @@ jobs:
                       "slotSetting": false
                     }
                   ]
-                
-            - task: AzureAppServiceSettings@1
-              displayName: Apply App Service Settings
-              inputs:
-                azureSubscription: ${{ parameters.azureSubscription }}
-                appName: 'func-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods-worldpay-api'
-                slotName: 'production'
-                appSettings: |
-                  [
-                    {
-                      "name": "AzureFunctionsWebHost__hostid",
-                      "value": "$(HostId)",
-                      "slotSetting": true
-                    }
-                  ]
-      
+                      
             - task: AzureAppServiceManage@0
               displayName: Start Staging Slot
               inputs:
