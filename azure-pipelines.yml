@@ -79,11 +79,8 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'Dev'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
         
-        
+
 - stage: DeploySIT
   displayName: 'Deploy to SIT'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
@@ -93,9 +90,6 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'SIT'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
 
 
 - stage: DeployPreProd
@@ -107,9 +101,6 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'PreProd'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)
 
 
 - stage: DeployProd
@@ -122,6 +113,3 @@ stages:
       parameters:
         environment: 'Prod'
         azureSubscription: 'AppServicesDevOps-Prod'
-        merchantCode: $(MerchantCode)
-        worldpayPaymentServiceUrl: $(WorldpayPaymentServiceUrl)
-        appInsightsConnectionString: $(AppInsightsConnectionString)

@@ -20,12 +20,6 @@ parameters:
   - name: timeoutSec
     type: number
     default: 120
-  - name: merchantCode
-    type: string
-  - name: appInsightsConnectionString
-    type: string
-  - name: worldpayPaymentServiceUrl
-    type: string
   
 jobs:
   - deployment:
@@ -63,7 +57,7 @@ jobs:
                     },
                     {
                       "name": "SiteSitting__MerchantCode",
-                      "value": "${{ parameters.merchantCode }}",
+                      "value": "$(MerchantCode)",
                       "slotSetting": false
                     },
                     {
@@ -78,7 +72,7 @@ jobs:
                     },
                     {
                       "name": "ExternalAppSettings__WorldpayPaymentServiceUrl",
-                      "value": "${{ parameters.worldpayPaymentServiceUrl }}",
+                      "value": "$(WorldpayPaymentServiceUrl)",
                       "slotSetting": false
                     },
                     {
@@ -98,11 +92,11 @@ jobs:
                     },
                     {
                       "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                      "value": "${{ parameters.appInsightsConnectionString }}",
+                      "value": "$(AppInsightsConnectionString)",
                       "slotSetting": false
                     }
                   ]
-      
+                      
             - task: AzureAppServiceManage@0
               displayName: Start Staging Slot
               inputs:
