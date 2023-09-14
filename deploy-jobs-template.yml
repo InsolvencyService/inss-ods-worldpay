@@ -92,9 +92,14 @@ jobs:
                     },
                     {
                       "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                      "value": "$(AppInsightsConnectionString)",
+                      "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=ods-appinsightsconnectionstring)",
                       "slotSetting": false
-                    }
+                    },
+                    {
+                      "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                      "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ods;SecretName=ods-appinsightsconnectionkey)",
+                      "slotSetting": false
+                    },
                   ]
                       
             - task: AzureAppServiceManage@0
